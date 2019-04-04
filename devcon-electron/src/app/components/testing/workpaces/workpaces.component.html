@@ -1,0 +1,30 @@
+<div class="childprocesss-wrapper">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Workspaces: 
+        <p class="worspace-admin-actions">
+          <button mat-raised-button color="primary" [disabled]="running" (click)="onClickCreate()">Create new</button>
+          <button mat-raised-button [disabled]="running">Import</button>
+        </p>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-xterm [lines]="stdout"></app-xterm>
+      <mat-card  *ngFor="let workspace of workspaces" class="workspace-list-item">
+        <mat-card-header><mat-card-title>{{workspace.name}}</mat-card-title></mat-card-header>
+        <mat-card-content>
+          <p class="workspace-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <p class="workspace-item-actions">
+            <button mat-raised-button color="primary" [disabled]="running">Run</button>
+            <button mat-raised-button [disabled]="running" (click)="onClickOpenWorkspace(workspace)">Open in editor</button>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>

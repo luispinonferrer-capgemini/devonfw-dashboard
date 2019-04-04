@@ -13,7 +13,7 @@ export class ConsoleOutputService {
   }
 
   getMessages(): Observable<string[]> {
-    ipcRenderer.on('');
+    // ipcRenderer.on('');
     return of(this.messages);
   }
 }

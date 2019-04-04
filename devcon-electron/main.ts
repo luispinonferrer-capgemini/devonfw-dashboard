@@ -1,18 +1,26 @@
-import { app, BrowserWindow, screen, Menu, ipcMain } from 'electron';
+import { app, BrowserWindow, screen, Menu, ipcMain, ipcRenderer, shell } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import { AppConfig } from './src/environments/environment';
 import { mainMenu } from './menu';
 import * as Path from './src/common/utils/Path';
 import * as fs from 'fs';
+import * as targz from 'targz';
+import * as http from 'http';
 import { ContextPathInfo } from './src/common/utils/ContextPathInfo';
 import { Workspace } from './src/modules/workspace/Workspace';
+import { createConnection } from 'typeorm';
+import { Item } from './src/assets/model/item.schema';
+import { exec, spawn, ChildProcess, execSync } from 'child_process';
+import Database from './src/electron/providers/Database';
+import ipcHandler from './src/electron/providers/ipcHandler';
+import Devon from './src/electron/providers/Devon';
 
 let win, serve;
 const args = process.argv.slice(1);
 serve = args.some((val) => val === '--serve');
 
-function createWindow() {
+async function createWindow() {
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
@@ -36,11 +44,16 @@ function createWindow() {
     y: 0,
     width: size.width,
     height: size.height,
+    webPreferences: {
+      backgroundThrottling: false,
+    },
+    transparent: false,
   });
 
   if (serve) {
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`),
+      ignored: '**/*.sqlite',
     });
     win.loadURL('http://localhost:4200');
   } else {
@@ -55,8 +68,6 @@ function createWindow() {
 
   win.webContents.openDevTools();
 
-  prueba(app.getAppPath());
-
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store window
@@ -68,13 +79,9 @@ function createWindow() {
   const menu = Menu.buildFromTemplate(mainMenu);
   Menu.setApplicationMenu(menu);
 
-  ipcMain.on('workspace-info', (event, workspaceInfo) => {
-    console.log(workspaceInfo);
-    Workspace.create(
-      workspaceInfo.workspaceName,
-      workspaceInfo.workspacePath[0],
-    );
-  });
+  // Set here de ipcHandlers for init
+  const ipcHandlers = [Database, Devon];
+  ipcHandlers.forEach(handler => new handler().init(win));
 }
 
 try {
@@ -102,21 +109,4 @@ try {
 } catch (e) {
   // Catch Error
   // throw e;
-}
-
-function prueba(prepath: any) {
-  const prpath = 'C:\\Project\\Devon-dist_2.4.0\\software\\devcon';
-
-  Workspace.create('prueba4', prpath);
-
-  // console.log(prepath.split(path.sep));
-  // console.log(path.parse(prepath));
-
-  // prepath = 'C:\\Project\\Devon-dist_2.4.0';
-  // const configfile = prepath + '\\conf\\settings.json';
-  // console.log(configfile);
-
-  // const settingsPath = fs.existsSync(configfile);
-  // const workspace = fs.existsSync(prepath + '\\workspaces');
-  // console.log('Archivo conf:' + settingsPath + ' Workspaces:' + workspace);
 }

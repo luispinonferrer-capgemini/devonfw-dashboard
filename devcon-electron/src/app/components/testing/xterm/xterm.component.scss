@@ -1,0 +1,22 @@
+.terminal-container{
+    // max-width: 80%;
+    background-color: black;
+    color: white;
+    height: 250px;
+    max-height: 250px;
+    overflow-y: scroll;
+    ul {
+        list-style: none;
+        padding: 15px;
+        margin: 0px;
+        
+        li {
+            line-height: 25px;
+        }
+    }
+}
+
+// .terminal-container-card {
+//     margin: 0 auto;
+//     width: 85%;
+// }

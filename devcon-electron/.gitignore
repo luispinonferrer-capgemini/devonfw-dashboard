@@ -67,6 +67,9 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
+/release
+/devondist
+*.zip 
 
 # Dependency directories
 node_modules/

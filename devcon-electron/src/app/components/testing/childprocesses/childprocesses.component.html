@@ -1,0 +1,8 @@
+<div class="childprocesss-wrapper">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Press button to run script: <button mat-raised-button color="primary" [disabled]="running" (click)="onClickRun()">Run!</button></mat-card-title>
+    </mat-card-header>
+  </mat-card>
+  <app-xterm [lines]="stdout"></app-xterm>
+</div>

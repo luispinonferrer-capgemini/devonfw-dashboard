@@ -28,7 +28,16 @@ import { CreateComponent } from './components/project/create/create.component';
 import { WorkspaceComponent } from './components/workspace/workspace.component';
 import { InfoComponent } from './components/dist/info/info.component';
 import { ConsoleOutputComponent } from './widgets/console-output/console-output.component';
-
+import { DatabaseService } from './providers/database.service';
+import { DevconService } from './providers/devcon.service';
+import { ToastService } from './providers/toast.service';
+import { DocDevonComponent } from './components/doc/doc-devon/doc-devon.component';
+import { SafePipe } from './pipes/SafePipe';
+import { DocDevonguideComponent } from './components/doc/doc-devonguide/doc-devonguide.component';
+import { ItemslistComponent } from './components/testing/itemslist/itemslist.component';
+import { ChildprocessesComponent } from './components/testing/childprocesses/childprocesses.component';
+import { XtermComponent } from './components/testing/xterm/xterm.component';
+import { WorkspacesComponent, WorkspaceNameDialog } from './components/testing/workpaces/workpaces.component';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,6 +54,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     WorkspaceComponent,
     InfoComponent,
     ConsoleOutputComponent,
+    ItemslistComponent,
+    DocDevonComponent,
+    SafePipe,
+    DocDevonguideComponent,
+    ChildprocessesComponent,
+    XtermComponent,
+    WorkspacesComponent,
+    WorkspaceNameDialog
   ],
   imports: [
     BrowserModule,
@@ -62,7 +79,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [ElectronService, SidenavService],
+  providers: [ElectronService, SidenavService, DatabaseService, DevconService, ToastService],
   bootstrap: [AppComponent],
+  entryComponents: [WorkspaceNameDialog]
 })
 export class AppModule {}

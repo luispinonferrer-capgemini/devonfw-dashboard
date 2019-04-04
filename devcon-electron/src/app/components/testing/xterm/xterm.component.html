@@ -1,0 +1,9 @@
+<mat-card class="terminal-container-card">
+  <mat-card-content>
+    <div #myTerminal class="terminal-container">
+      <ul>
+        <li *ngFor="let line of lines">>&emsp;{{line}}</li>
+      </ul>
+    </div>
+  </mat-card-content>
+</mat-card>

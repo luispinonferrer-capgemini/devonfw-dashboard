@@ -63,7 +63,8 @@
           <mat-panel-title> Doc </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-list-item>devon</a> <a mat-list-item>devon Guide</a>
+          <a routerLink="doc-devon" mat-list-item>devon</a> 
+          <a routerLink="doc-devonguide" mat-list-item>devon Guide</a>
           <a mat-list-item>Get Started</a> <a mat-list-item>Links</a>
           <a mat-list-item>devon4j Guide</a> <a mat-list-item>User Guide</a>
         </mat-nav-list>
@@ -82,6 +83,11 @@
         <mat-expansion-panel-header>
           <mat-panel-title> Custom Module </mat-panel-title>
         </mat-expansion-panel-header>
+          <mat-nav-list>
+            <a routerLink="databasetests" mat-list-item>Sqlite3 Tests</a>
+            <a routerLink="childprocessestests" mat-list-item>Child Processes Tests</a>
+            <a routerLink="test-workspaces" mat-list-item>Workspaces Tests</a>
+          </mat-nav-list>
       </mat-expansion-panel>
     </mat-accordion>
   </mat-sidenav>
